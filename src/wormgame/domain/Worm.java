@@ -22,7 +22,7 @@ public class Worm {
     public Direction direction;
     public List<Piece> body;
     public Piece onePiece;
-    public int size=1;
+    public int size=4;
     
     public Worm(int originalX, int originalY, Direction originalDirection){
         this.x=originalX;
@@ -38,7 +38,7 @@ public class Worm {
         return this.direction;
     }
     
-    public void serDirection(Direction dir){
+    public void setDirection(Direction dir){
         this.direction=dir;
     }
     
@@ -48,30 +48,48 @@ public class Worm {
     
     public List<Piece> getPieces(){
         
-            Collections.reverse(body);
+        
+        
             return body;
     }
     
     public void move(){
         //later to do it
-        
-        if(direction==Direction.UP)
+        onePiece=null;
+        if(direction==Direction.UP){
            onePiece= new Piece(x,y+1);
-            if(body.size()<4)
-                body.add(onePiece);
-            else 
-                body.add(onePiece);
+   
+        }else if(direction==Direction.DOWN){
+            onePiece= new Piece(x,y-1);
+            
+        }else if(direction==Direction.LEFT){
+            onePiece= new Piece(x-1,y);
+            
+        }else if(direction==Direction.RIGHT){
+            onePiece= new Piece(x+1,y);
+            
+        }
+         x=onePiece.getX();
+         y=onePiece.getY();
+         body.add(onePiece);
+         
+         if(body.size()>=size)
+                body.remove(0);
+            
+        
+            
                 
             
     }
     
     public void grow(){
         //do it later
+        size++;
     }
     
     public boolean runsInto(Piece piece){
         for(Piece pi:getPieces()){
-            if(pi.getX()==piece.getX() && pi.getY()==piece.getY())
+            if(pi.runsInto(piece))
                 return true;
             
         }
@@ -80,11 +98,11 @@ public class Worm {
     }
     
     public boolean runsIntoItself(){
-        Piece pi = getPieces().get(0);
-        List<Piece> list=getPieces();
+        Piece pi = body.get(body.size()-1);
+        List<Piece> list=body;
         if(list.size()>=2){
-            for(int i=1; i<list.size();i++){
-                if(pi.getX()==list.get(i).getX() && pi.getY()==list.get(i).getY())
+            for(int i=0; i<list.size()-1;i++){
+                if(pi.runsInto(list.get(i)))
                     return true;
 
             }
