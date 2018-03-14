@@ -6,10 +6,13 @@
 package wormgame.domain;
 
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+//import javafx.scene.paint.Color;
 import wormgame.Direction;
 
 /**
@@ -102,5 +105,12 @@ public class Worm {
         }
         return false;
             
+    }
+    
+    public void draw(Graphics g, int pieceLength){
+        for(Piece piece:body){
+            g.setColor(Color.BLACK);
+            g.fill3DRect(piece.getX(), piece.getY(), pieceLength, pieceLength, true);
+        }
     }
 }
