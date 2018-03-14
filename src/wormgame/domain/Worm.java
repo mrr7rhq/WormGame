@@ -22,7 +22,7 @@ public class Worm {
     public Direction direction;
     public List<Piece> body;
     public Piece onePiece;
-    public int size=4;
+    public int wormSize=4;
     
     public Worm(int originalX, int originalY, Direction originalDirection){
         this.x=originalX;
@@ -46,10 +46,7 @@ public class Worm {
         return body.size();
     }
     
-    public List<Piece> getPieces(){
-        
-        
-        
+    public List<Piece> getPieces(){       
             return body;
     }
     
@@ -73,18 +70,14 @@ public class Worm {
          y=onePiece.getY();
          body.add(onePiece);
          
-         if(body.size()>=size)
+         if(body.size()>=wormSize)
                 body.remove(0);
-            
-        
-            
-                
             
     }
     
     public void grow(){
         //do it later
-        size++;
+        wormSize++;
     }
     
     public boolean runsInto(Piece piece){
