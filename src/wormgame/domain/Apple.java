@@ -16,11 +16,15 @@ public class Apple extends Piece{
     
     public Apple(int x, int y) {
         super(x, y);
+        
     }
+   
     
-    public void draw(Graphics g, int pieceLength){
-        g.setColor(Color.red);
-        g.fillOval(this.getX(), this.getY(), pieceLength, pieceLength);
-    }
+    
+//    public void draw(Graphics g, int pieceLength){
+//        g.setColor(Color.red);
+//        g.fillOval(this.getX()*pieceLength, this.getY()*pieceLength, pieceLength, pieceLength);
+//    }
+   
     
 }

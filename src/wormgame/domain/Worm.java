@@ -20,12 +20,12 @@ import wormgame.Direction;
  * @author feihua
  */
 public class Worm {
-    public int x;
-    public int y;
-    public Direction direction;
-    public List<Piece> body;
-    public Piece onePiece;
-    public int wormSize=4;
+    private int x;
+    private int y;
+   private Direction direction;
+    private List<Piece> body;
+    private Piece onePiece;
+    private int wormSize=4;
     
     public Worm(int originalX, int originalY, Direction originalDirection){
         this.x=originalX;
@@ -57,10 +57,10 @@ public class Worm {
         //later to do it
         onePiece=null;
         if(direction==Direction.UP){
-           onePiece= new Piece(x,y+1);
+           onePiece= new Piece(x,y-1);
    
         }else if(direction==Direction.DOWN){
-            onePiece= new Piece(x,y-1);
+            onePiece= new Piece(x,y+1);
             
         }else if(direction==Direction.LEFT){
             onePiece= new Piece(x-1,y);
@@ -80,7 +80,9 @@ public class Worm {
     
     public void grow(){
         //do it later
-        wormSize++;
+        if(body.size()>=3)
+            wormSize++;
+        
     }
     
     public boolean runsInto(Piece piece){
@@ -110,7 +112,11 @@ public class Worm {
     public void draw(Graphics g, int pieceLength){
         for(Piece piece:body){
             g.setColor(Color.BLACK);
-            g.fill3DRect(piece.getX(), piece.getY(), pieceLength, pieceLength, true);
+            g.fill3DRect(piece.getX()*pieceLength, piece.getY()*pieceLength, pieceLength, pieceLength, true);
         }
+    }
+    
+    public Piece wormHead(){
+        return new Piece(x,y);
     }
 }
